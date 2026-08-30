@@ -10,7 +10,10 @@
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
   <title>Imara Connect</title>
 
@@ -21,42 +24,34 @@
 
     html,
     body {
-      margin: 0;
-      padding: 0;
-
       width: 100%;
-      min-width: 100%;
-      max-width: 100%;
-
       height: 100%;
       min-height: 100%;
-
+      margin: 0;
+      padding: 0;
       overflow: hidden;
-
       background: #ffffff;
     }
 
     body {
       position: fixed;
       inset: 0;
-
       width: 100vw;
       height: 100vh;
       height: 100dvh;
     }
 
+    /* ======================================================
+       IMARA CONNECT APPLICATION
+       ====================================================== */
+
     #appFrame {
       position: fixed;
-
-      top: 0;
-      left: 0;
+      inset: 0;
 
       display: block;
 
       width: 100%;
-      min-width: 100%;
-      max-width: 100%;
-
       height: 100vh;
       height: 100dvh;
 
@@ -65,8 +60,6 @@
 
       border: 0;
       outline: 0;
-
-      overflow: hidden;
 
       background: #ffffff;
     }
@@ -79,34 +72,82 @@
     }
 
     /* ======================================================
-       PC LOADING SCREEN
+       IMARA CONNECT LOADING SCREEN
        ====================================================== */
 
     #desktopLoader {
       position: fixed;
       inset: 0;
-
       z-index: 999999;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
+      overflow: hidden;
+
       background:
         radial-gradient(
-          circle at 50% 38%,
-          #6f88e2 0%,
-          #4d68c7 34%,
-          #29469e 68%,
-          #1b347e 100%
+          circle at 82% 8%,
+          rgba(255, 255, 255, 0.16) 0,
+          transparent 28%
+        ),
+        linear-gradient(
+          155deg,
+          #183a7d 0%,
+          #244b91 48%,
+          #315ca8 100%
         );
 
       opacity: 1;
       visibility: visible;
 
       transition:
-        opacity 0.55s ease,
-        visibility 0.55s ease;
+        opacity 0.65s ease,
+        visibility 0.65s ease;
+    }
+
+    #desktopLoader::before {
+      content: "";
+
+      position: absolute;
+      right: -120px;
+      bottom: -150px;
+
+      width: 480px;
+      height: 280px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          130deg,
+          #d7212b,
+          #ef3036
+        );
+
+      transform: rotate(-15deg);
+
+      box-shadow:
+        0 0 0 25px rgba(255, 255, 255, 0.025);
+    }
+
+    #desktopLoader::after {
+      content: "";
+
+      position: absolute;
+      top: -170px;
+      left: -170px;
+
+      width: 390px;
+      height: 390px;
+
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 45px rgba(255, 255, 255, 0.035),
+        0 0 0 90px rgba(255, 255, 255, 0.02);
     }
 
     #desktopLoader.hide {
@@ -115,153 +156,191 @@
       pointer-events: none;
     }
 
-    .desktop-loader-content {
+    .imara-loader-content {
+      position: relative;
+      z-index: 2;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      text-align: center;
       color: #ffffff;
+      text-align: center;
 
       font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         Arial,
-        Helvetica,
         sans-serif;
     }
 
-    /* Circular loader */
+    /* ======================================================
+       APPLE-STYLE SEGMENTED SPINNER
+       ====================================================== */
 
-    .desktop-spinner {
+    .apple-spinner {
       position: relative;
 
-      width: 62px;
-      height: 62px;
+      width: 58px;
+      height: 58px;
 
-      margin-bottom: 24px;
-    }
-
-    .desktop-spinner::before {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      border-radius: 50%;
-
-      border:
-        4px solid
-        rgba(255,255,255,0.20);
-
-      border-top-color: #ffffff;
-      border-right-color: #dce5ff;
+      margin-bottom: 28px;
 
       animation:
-        desktopSpin 0.8s
-        linear
+        appleSpinnerRotation 0.9s
+        steps(12)
         infinite;
-
-      box-shadow:
-        0 0 28px
-        rgba(205,220,255,0.20);
     }
 
-    .desktop-spinner::after {
-      content: "";
-
+    .apple-spinner span {
       position: absolute;
 
-      inset: 17px;
+      top: 3px;
+      left: 27px;
 
-      border-radius: 50%;
+      width: 4px;
+      height: 15px;
 
-      background:
-        rgba(255,255,255,0.10);
-    }
-
-    .desktop-loader-title {
-      font-size: 13px;
-      font-weight: 900;
-
-      letter-spacing: 4px;
-
-      text-transform: uppercase;
-    }
-
-    .desktop-loader-dots {
-      display: flex;
-      gap: 7px;
-
-      margin-top: 15px;
-    }
-
-    .desktop-loader-dots span {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
+      border-radius: 5px;
 
       background: #ffffff;
 
-      opacity: 0.25;
-
-      animation:
-        desktopDot 1.1s
-        ease-in-out
-        infinite;
+      transform-origin: 2px 26px;
     }
 
-    .desktop-loader-dots span:nth-child(2) {
-      animation-delay: 0.15s;
+    .apple-spinner span:nth-child(1) {
+      transform: rotate(0deg);
+      opacity: 1;
     }
 
-    .desktop-loader-dots span:nth-child(3) {
-      animation-delay: 0.30s;
+    .apple-spinner span:nth-child(2) {
+      transform: rotate(30deg);
+      opacity: 0.92;
     }
 
-    .desktop-loader-subtitle {
-      margin-top: 12px;
-
-      font-size: 10px;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.72
-        );
-
-      letter-spacing: 0.05em;
+    .apple-spinner span:nth-child(3) {
+      transform: rotate(60deg);
+      opacity: 0.84;
     }
 
-    @keyframes desktopSpin {
+    .apple-spinner span:nth-child(4) {
+      transform: rotate(90deg);
+      opacity: 0.76;
+    }
+
+    .apple-spinner span:nth-child(5) {
+      transform: rotate(120deg);
+      opacity: 0.68;
+    }
+
+    .apple-spinner span:nth-child(6) {
+      transform: rotate(150deg);
+      opacity: 0.60;
+    }
+
+    .apple-spinner span:nth-child(7) {
+      transform: rotate(180deg);
+      opacity: 0.52;
+    }
+
+    .apple-spinner span:nth-child(8) {
+      transform: rotate(210deg);
+      opacity: 0.44;
+    }
+
+    .apple-spinner span:nth-child(9) {
+      transform: rotate(240deg);
+      opacity: 0.36;
+    }
+
+    .apple-spinner span:nth-child(10) {
+      transform: rotate(270deg);
+      opacity: 0.28;
+    }
+
+    .apple-spinner span:nth-child(11) {
+      transform: rotate(300deg);
+      opacity: 0.20;
+    }
+
+    .apple-spinner span:nth-child(12) {
+      transform: rotate(330deg);
+      opacity: 0.12;
+    }
+
+    @keyframes appleSpinnerRotation {
       to {
         transform: rotate(360deg);
       }
     }
 
-    @keyframes desktopDot {
-      0%,
-      100% {
-        opacity: 0.25;
-        transform: translateY(0);
-      }
+    /* ======================================================
+       IMARA LOADING TEXT
+       ====================================================== */
 
-      50% {
-        opacity: 1;
-        transform: translateY(-4px);
-      }
+    .loader-school {
+      margin-bottom: 9px;
+
+      color: rgba(255, 255, 255, 0.72);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .loader-title {
+      font-size: 21px;
+      font-weight: 900;
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .loader-red-line {
+      width: 42px;
+      height: 3px;
+
+      margin-top: 15px;
+
+      border-radius: 5px;
+
+      background: #ef3036;
+
+      box-shadow:
+        0 5px 15px rgba(239, 48, 54, 0.4);
+    }
+
+    .loader-subtitle {
+      margin-top: 16px;
+
+      color: rgba(255, 255, 255, 0.68);
+
+      font-size: 10px;
+
+      letter-spacing: 0.04em;
     }
 
     /* ======================================================
-       IMPORTANT:
-       DO NOT SHOW THIS LOADER ON PHONES
+       HIDE GITHUB LOADER ON MOBILE
        ====================================================== */
 
     @media screen and (max-width: 768px) {
       #desktopLoader {
         display: none !important;
+      }
+    }
+
+    @media screen and (max-height: 650px) {
+      .apple-spinner {
+        margin-bottom: 20px;
+      }
+
+      .loader-subtitle {
+        margin-top: 12px;
       }
     }
   </style>
@@ -270,138 +349,112 @@
 <body>
 
   <!-- ====================================================
-       PC LAUNCHING ANIMATION
+       IMARA CONNECT APPLE-STYLE LOADER
        ==================================================== -->
 
   <div id="desktopLoader">
 
-    <div class="desktop-loader-content">
+    <div class="imara-loader-content">
 
-      <div class="desktop-spinner"></div>
-
-      <div class="desktop-loader-title">
-        LANCEMENT…
-      </div>
-
-      <div class="desktop-loader-dots">
+      <div class="apple-spinner" aria-label="Chargement">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
         <span></span>
         <span></span>
         <span></span>
       </div>
 
-      <div class="desktop-loader-subtitle">
-        Préparation du portail scolaire
+      <div class="loader-school">
+        Collège Imara · Primaire
+      </div>
+
+      <div class="loader-title">
+        Imara Connect
+      </div>
+
+      <div class="loader-red-line"></div>
+
+      <div class="loader-subtitle">
+        Préparation de votre espace scolaire…
       </div>
 
     </div>
 
   </div>
 
-
   <!-- ====================================================
-       YOUR EXISTING APP
+       IMARA CONNECT GOOGLE APPS SCRIPT
        ==================================================== -->
 
   <iframe
     id="appFrame"
-
     src="https://script.google.com/macros/s/AKfycbx1HmWBN_rORB1dT89hH1C098RYuof4Wf_wyWTEUInrr8ZXI3orwWs9zmyc-AnkN1PmZA/exec"
-
     title="Imara Connect"
-
     scrolling="no"
-
     allow="fullscreen"
-
     allowfullscreen
   ></iframe>
 
   <script>
-
     const frame =
       document.getElementById("appFrame");
 
     const desktopLoader =
       document.getElementById("desktopLoader");
 
-
-    /* ====================================================
-       MOBILE DETECTION
-       ==================================================== */
-
     const isMobile =
       window.matchMedia(
         "(max-width: 768px)"
       ).matches;
 
-
     /*
-     * Phones:
-     * no GitHub loader.
-     *
-     * Your Android/mobile animation
-     * remains responsible for startup.
+     * Android and mobile already have their own intro.
      */
     if (isMobile) {
-
-      desktopLoader.style.display =
-        "none";
-
+      desktopLoader.style.display = "none";
     }
 
-
     /*
-     * PC:
-     * wait for the iframe to finish loading,
-     * then keep the loader visible briefly
-     * so the Direction / Enseignant interface
-     * has time to form correctly.
+     * Desktop:
+     * hide the Apple-style loader after Imara Connect loads.
      */
     else {
-
       frame.addEventListener(
         "load",
         function () {
-
           setTimeout(
             function () {
-
-              desktopLoader.classList.add(
-                "hide"
-              );
+              desktopLoader.classList.add("hide");
 
               setTimeout(
                 function () {
-
                   if (
                     desktopLoader &&
                     desktopLoader.parentNode
                   ) {
-
                     desktopLoader.remove();
-
                   }
-
                 },
-                650
+                700
               );
-
             },
-            1500
+            1400
           );
-
         }
       );
-
     }
 
-
-    /* ====================================================
-       YOUR EXISTING RESPONSIVE LOGIC
-       ==================================================== */
-
+    /*
+     * Keep the application fitted to the available screen.
+     */
     function resizeApp() {
-
       const width =
         window.visualViewport
           ? window.visualViewport.width
@@ -412,11 +465,8 @@
           ? window.visualViewport.height
           : window.innerHeight;
 
-      frame.style.width =
-        width + "px";
-
-      frame.style.height =
-        height + "px";
+      frame.style.width = width + "px";
+      frame.style.height = height + "px";
     }
 
     window.addEventListener(
@@ -432,26 +482,19 @@
     window.addEventListener(
       "orientationchange",
       function () {
-
         setTimeout(
           resizeApp,
           200
         );
-
       }
     );
 
-    if (
-      window.visualViewport
-    ) {
-
+    if (window.visualViewport) {
       window.visualViewport.addEventListener(
         "resize",
         resizeApp
       );
-
     }
-
   </script>
 
 </body>
