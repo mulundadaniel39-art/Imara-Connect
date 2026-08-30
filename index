@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>Imara Connect</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+
+      height: 100%;
+      min-height: 100%;
+
+      overflow: hidden;
+
+      background: #ffffff;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
+
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    #appFrame {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      display: block;
+
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+
+      height: 100vh;
+      height: 100dvh;
+
+      margin: 0;
+      padding: 0;
+
+      border: 0;
+      outline: 0;
+
+      overflow: hidden;
+
+      background: #ffffff;
+    }
+
+    @supports not (height: 100dvh) {
+      body,
+      #appFrame {
+        height: 100vh;
+      }
+    }
+
+    /* ======================================================
+       PC LOADING SCREEN
+       ====================================================== */
+
+    #desktopLoader {
+      position: fixed;
+      inset: 0;
+
+      z-index: 999999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at 50% 38%,
+          #6f88e2 0%,
+          #4d68c7 34%,
+          #29469e 68%,
+          #1b347e 100%
+        );
+
+      opacity: 1;
+      visibility: visible;
+
+      transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+    }
+
+    #desktopLoader.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .desktop-loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      color: #ffffff;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    /* Circular loader */
+
+    .desktop-spinner {
+      position: relative;
+
+      width: 62px;
+      height: 62px;
+
+      margin-bottom: 24px;
+    }
+
+    .desktop-spinner::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      border-radius: 50%;
+
+      border:
+        4px solid
+        rgba(255,255,255,0.20);
+
+      border-top-color: #ffffff;
+      border-right-color: #dce5ff;
+
+      animation:
+        desktopSpin 0.8s
+        linear
+        infinite;
+
+      box-shadow:
+        0 0 28px
+        rgba(205,220,255,0.20);
+    }
+
+    .desktop-spinner::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 17px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.10);
+    }
+
+    .desktop-loader-title {
+      font-size: 13px;
+      font-weight: 900;
+
+      letter-spacing: 4px;
+
+      text-transform: uppercase;
+    }
+
+    .desktop-loader-dots {
+      display: flex;
+      gap: 7px;
+
+      margin-top: 15px;
+    }
+
+    .desktop-loader-dots span {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #ffffff;
+
+      opacity: 0.25;
+
+      animation:
+        desktopDot 1.1s
+        ease-in-out
+        infinite;
+    }
+
+    .desktop-loader-dots span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .desktop-loader-dots span:nth-child(3) {
+      animation-delay: 0.30s;
+    }
+
+    .desktop-loader-subtitle {
+      margin-top: 12px;
+
+      font-size: 10px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          0.72
+        );
+
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes desktopSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes desktopDot {
+      0%,
+      100% {
+        opacity: 0.25;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-4px);
+      }
+    }
+
+    /* ======================================================
+       IMPORTANT:
+       DO NOT SHOW THIS LOADER ON PHONES
+       ====================================================== */
+
+    @media screen and (max-width: 768px) {
+      #desktopLoader {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================================================
+       PC LAUNCHING ANIMATION
+       ==================================================== -->
+
+  <div id="desktopLoader">
+
+    <div class="desktop-loader-content">
+
+      <div class="desktop-spinner"></div>
+
+      <div class="desktop-loader-title">
+        LANCEMENT…
+      </div>
+
+      <div class="desktop-loader-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="desktop-loader-subtitle">
+        Préparation du portail scolaire
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ====================================================
+       YOUR EXISTING APP
+       ==================================================== -->
+
+  <iframe
+    id="appFrame"
+
+    src="https://script.google.com/macros/s/AKfycbyRWmHsARqarFQVRprp4Nd4tclMC3y7cK0F760OWKPHKy9nKu6T-j6R0DXzmSvBhx0KPQ/exec"
+
+    title="Imara Connect"
+
+    scrolling="no"
+
+    allow="fullscreen"
+
+    allowfullscreen
+  ></iframe>
+
+  <script>
+
+    const frame =
+      document.getElementById("appFrame");
+
+    const desktopLoader =
+      document.getElementById("desktopLoader");
+
+
+    /* ====================================================
+       MOBILE DETECTION
+       ==================================================== */
+
+    const isMobile =
+      window.matchMedia(
+        "(max-width: 768px)"
+      ).matches;
+
+
+    /*
+     * Phones:
+     * no GitHub loader.
+     *
+     * Your Android/mobile animation
+     * remains responsible for startup.
+     */
+    if (isMobile) {
+
+      desktopLoader.style.display =
+        "none";
+
+    }
+
+
+    /*
+     * PC:
+     * wait for the iframe to finish loading,
+     * then keep the loader visible briefly
+     * so the Direction / Enseignant interface
+     * has time to form correctly.
+     */
+    else {
+
+      frame.addEventListener(
+        "load",
+        function () {
+
+          setTimeout(
+            function () {
+
+              desktopLoader.classList.add(
+                "hide"
+              );
+
+              setTimeout(
+                function () {
+
+                  if (
+                    desktopLoader &&
+                    desktopLoader.parentNode
+                  ) {
+
+                    desktopLoader.remove();
+
+                  }
+
+                },
+                650
+              );
+
+            },
+            1500
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ====================================================
+       YOUR EXISTING RESPONSIVE LOGIC
+       ==================================================== */
+
+    function resizeApp() {
+
+      const width =
+        window.visualViewport
+          ? window.visualViewport.width
+          : window.innerWidth;
+
+      const height =
+        window.visualViewport
+          ? window.visualViewport.height
+          : window.innerHeight;
+
+      frame.style.width =
+        width + "px";
+
+      frame.style.height =
+        height + "px";
+    }
+
+    window.addEventListener(
+      "load",
+      resizeApp
+    );
+
+    window.addEventListener(
+      "resize",
+      resizeApp
+    );
+
+    window.addEventListener(
+      "orientationchange",
+      function () {
+
+        setTimeout(
+          resizeApp,
+          200
+        );
+
+      }
+    );
+
+    if (
+      window.visualViewport
+    ) {
+
+      window.visualViewport.addEventListener(
+        "resize",
+        resizeApp
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
