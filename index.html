@@ -18,9 +18,7 @@
   <title>Imara Connect</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html,
     body {
@@ -41,113 +39,66 @@
       height: 100dvh;
     }
 
-    /* ======================================================
-       IMARA CONNECT APPLICATION
-       ====================================================== */
-
     #appFrame {
       position: fixed;
       inset: 0;
-
       display: block;
-
       width: 100%;
       height: 100vh;
       height: 100dvh;
-
       margin: 0;
       padding: 0;
-
       border: 0;
       outline: 0;
-
       background: #ffffff;
     }
 
     @supports not (height: 100dvh) {
       body,
-      #appFrame {
-        height: 100vh;
-      }
+      #appFrame { height: 100vh; }
     }
-
-    /* ======================================================
-       IMARA CONNECT LOADING SCREEN
-       ====================================================== */
 
     #desktopLoader {
       position: fixed;
       inset: 0;
       z-index: 999999;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       overflow: hidden;
-
       background:
-        radial-gradient(
-          circle at 82% 8%,
-          rgba(255, 255, 255, 0.16) 0,
-          transparent 28%
-        ),
-        linear-gradient(
-          155deg,
-          #183a7d 0%,
-          #244b91 48%,
-          #315ca8 100%
-        );
-
+        radial-gradient(circle at 82% 8%, rgba(255,255,255,.16) 0, transparent 28%),
+        linear-gradient(155deg, #183a7d 0%, #244b91 48%, #315ca8 100%);
       opacity: 1;
       visibility: visible;
-
-      transition:
-        opacity 0.65s ease,
-        visibility 0.65s ease;
+      transition: opacity .65s ease, visibility .65s ease;
     }
 
     #desktopLoader::before {
       content: "";
-
       position: absolute;
       right: -120px;
       bottom: -150px;
-
       width: 480px;
       height: 280px;
-
       border-radius: 50%;
-
-      background:
-        linear-gradient(
-          130deg,
-          #d7212b,
-          #ef3036
-        );
-
+      background: linear-gradient(130deg, #d7212b, #ef3036);
       transform: rotate(-15deg);
-
-      box-shadow:
-        0 0 0 25px rgba(255, 255, 255, 0.025);
+      box-shadow: 0 0 0 25px rgba(255,255,255,.025);
     }
 
     #desktopLoader::after {
       content: "";
-
       position: absolute;
       top: -170px;
       left: -170px;
-
       width: 390px;
       height: 390px;
-
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 50%;
-
       box-shadow:
-        0 0 0 45px rgba(255, 255, 255, 0.035),
-        0 0 0 90px rgba(255, 255, 255, 0.02);
+        0 0 0 45px rgba(255,255,255,.035),
+        0 0 0 90px rgba(255,255,255,.02);
     }
 
     #desktopLoader.hide {
@@ -159,239 +110,108 @@
     .imara-loader-content {
       position: relative;
       z-index: 2;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
       color: #ffffff;
       text-align: center;
-
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     }
-
-    /* ======================================================
-       APPLE-STYLE SEGMENTED SPINNER
-       ====================================================== */
 
     .apple-spinner {
       position: relative;
-
       width: 58px;
       height: 58px;
-
       margin-bottom: 28px;
-
-      animation:
-        appleSpinnerRotation 0.9s
-        steps(12)
-        infinite;
+      animation: appleSpinnerRotation .9s steps(12) infinite;
     }
 
     .apple-spinner span {
       position: absolute;
-
       top: 3px;
       left: 27px;
-
       width: 4px;
       height: 15px;
-
       border-radius: 5px;
-
       background: #ffffff;
-
       transform-origin: 2px 26px;
     }
 
-    .apple-spinner span:nth-child(1) {
-      transform: rotate(0deg);
-      opacity: 1;
-    }
+    .apple-spinner span:nth-child(1){transform:rotate(0deg);opacity:1}
+    .apple-spinner span:nth-child(2){transform:rotate(30deg);opacity:.92}
+    .apple-spinner span:nth-child(3){transform:rotate(60deg);opacity:.84}
+    .apple-spinner span:nth-child(4){transform:rotate(90deg);opacity:.76}
+    .apple-spinner span:nth-child(5){transform:rotate(120deg);opacity:.68}
+    .apple-spinner span:nth-child(6){transform:rotate(150deg);opacity:.60}
+    .apple-spinner span:nth-child(7){transform:rotate(180deg);opacity:.52}
+    .apple-spinner span:nth-child(8){transform:rotate(210deg);opacity:.44}
+    .apple-spinner span:nth-child(9){transform:rotate(240deg);opacity:.36}
+    .apple-spinner span:nth-child(10){transform:rotate(270deg);opacity:.28}
+    .apple-spinner span:nth-child(11){transform:rotate(300deg);opacity:.20}
+    .apple-spinner span:nth-child(12){transform:rotate(330deg);opacity:.12}
 
-    .apple-spinner span:nth-child(2) {
-      transform: rotate(30deg);
-      opacity: 0.92;
-    }
-
-    .apple-spinner span:nth-child(3) {
-      transform: rotate(60deg);
-      opacity: 0.84;
-    }
-
-    .apple-spinner span:nth-child(4) {
-      transform: rotate(90deg);
-      opacity: 0.76;
-    }
-
-    .apple-spinner span:nth-child(5) {
-      transform: rotate(120deg);
-      opacity: 0.68;
-    }
-
-    .apple-spinner span:nth-child(6) {
-      transform: rotate(150deg);
-      opacity: 0.60;
-    }
-
-    .apple-spinner span:nth-child(7) {
-      transform: rotate(180deg);
-      opacity: 0.52;
-    }
-
-    .apple-spinner span:nth-child(8) {
-      transform: rotate(210deg);
-      opacity: 0.44;
-    }
-
-    .apple-spinner span:nth-child(9) {
-      transform: rotate(240deg);
-      opacity: 0.36;
-    }
-
-    .apple-spinner span:nth-child(10) {
-      transform: rotate(270deg);
-      opacity: 0.28;
-    }
-
-    .apple-spinner span:nth-child(11) {
-      transform: rotate(300deg);
-      opacity: 0.20;
-    }
-
-    .apple-spinner span:nth-child(12) {
-      transform: rotate(330deg);
-      opacity: 0.12;
-    }
-
-    @keyframes appleSpinnerRotation {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* ======================================================
-       IMARA LOADING TEXT
-       ====================================================== */
+    @keyframes appleSpinnerRotation { to { transform: rotate(360deg); } }
 
     .loader-school {
       margin-bottom: 9px;
-
-      color: rgba(255, 255, 255, 0.72);
-
+      color: rgba(255,255,255,.72);
       font-size: 9px;
       font-weight: 800;
-
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
       text-transform: uppercase;
     }
 
     .loader-title {
       font-size: 21px;
       font-weight: 900;
-
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
       text-transform: uppercase;
     }
 
     .loader-red-line {
       width: 42px;
       height: 3px;
-
       margin-top: 15px;
-
       border-radius: 5px;
-
       background: #ef3036;
-
-      box-shadow:
-        0 5px 15px rgba(239, 48, 54, 0.4);
+      box-shadow: 0 5px 15px rgba(239,48,54,.4);
     }
 
     .loader-subtitle {
       margin-top: 16px;
-
-      color: rgba(255, 255, 255, 0.68);
-
+      color: rgba(255,255,255,.68);
       font-size: 10px;
-
-      letter-spacing: 0.04em;
+      letter-spacing: .04em;
     }
 
-    /* ======================================================
-       HIDE GITHUB LOADER ON MOBILE
-       ====================================================== */
-
     @media screen and (max-width: 768px) {
-      #desktopLoader {
-        display: none !important;
-      }
+      #desktopLoader { display: none !important; }
     }
 
     @media screen and (max-height: 650px) {
-      .apple-spinner {
-        margin-bottom: 20px;
-      }
-
-      .loader-subtitle {
-        margin-top: 12px;
-      }
+      .apple-spinner { margin-bottom: 20px; }
+      .loader-subtitle { margin-top: 12px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ====================================================
-       IMARA CONNECT APPLE-STYLE LOADER
-       ==================================================== -->
-
   <div id="desktopLoader">
-
     <div class="imara-loader-content">
-
       <div class="apple-spinner" aria-label="Chargement">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
       </div>
 
-      <div class="loader-school">
-        Collège Imara · Primaire
-      </div>
-
-      <div class="loader-title">
-        Imara Connect
-      </div>
-
+      <div class="loader-school">Collège Imara · Primaire</div>
+      <div class="loader-title">Imara Connect</div>
       <div class="loader-red-line"></div>
-
-      <div class="loader-subtitle">
-        Préparation de votre espace scolaire…
-      </div>
-
+      <div class="loader-subtitle">Préparation de votre espace scolaire…</div>
     </div>
-
   </div>
-
-  <!-- ====================================================
-       IMARA CONNECT GOOGLE APPS SCRIPT
-       ==================================================== -->
 
   <iframe
     id="appFrame"
@@ -403,16 +223,50 @@
   ></iframe>
 
   <script>
-    const frame =
-      document.getElementById("appFrame");
+    const frame = document.getElementById("appFrame");
+    const desktopLoader = document.getElementById("desktopLoader");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    const desktopLoader =
-      document.getElementById("desktopLoader");
+    /*
+     * Keep the latest Android FCM token in the GitHub wrapper.
+     * The Apps Script application runs inside the iframe, so the token
+     * must be forwarded to it with postMessage.
+     */
+    let imaraNativePushToken =
+      String(window.ImaraNativePushToken || "").trim();
 
-    const isMobile =
-      window.matchMedia(
-        "(max-width: 768px)"
-      ).matches;
+    function forwardNativePushTokenToApp() {
+      const token =
+        String(
+          imaraNativePushToken ||
+          window.ImaraNativePushToken ||
+          ""
+        ).trim();
+
+      if (!token || !frame || !frame.contentWindow) return;
+
+      frame.contentWindow.postMessage(
+        {
+          type: "IMARA_FCM_TOKEN",
+          token: token
+        },
+        "*"
+      );
+    }
+
+    /*
+     * MainActivity dispatches this event after Firebase gives Android
+     * the device token.
+     */
+    window.addEventListener(
+      "imara-fcm-token",
+      function (event) {
+        imaraNativePushToken =
+          String(event && event.detail || "").trim();
+
+        forwardNativePushTokenToApp();
+      }
+    );
 
     /*
      * Android and mobile already have their own intro.
@@ -422,23 +276,23 @@
     }
 
     /*
-     * Desktop:
-     * hide the Apple-style loader after Imara Connect loads.
+     * When Apps Script has finished loading, forward the token again.
+     * This also handles the case where Android obtained the token before
+     * the iframe was ready.
      */
-    else {
-      frame.addEventListener(
-        "load",
-        function () {
+    frame.addEventListener(
+      "load",
+      function () {
+        forwardNativePushTokenToApp();
+
+        if (!isMobile) {
           setTimeout(
             function () {
               desktopLoader.classList.add("hide");
 
               setTimeout(
                 function () {
-                  if (
-                    desktopLoader &&
-                    desktopLoader.parentNode
-                  ) {
+                  if (desktopLoader && desktopLoader.parentNode) {
                     desktopLoader.remove();
                   }
                 },
@@ -448,12 +302,9 @@
             1400
           );
         }
-      );
-    }
+      }
+    );
 
-    /*
-     * Keep the application fitted to the available screen.
-     */
     function resizeApp() {
       const width =
         window.visualViewport
@@ -469,31 +320,22 @@
       frame.style.height = height + "px";
     }
 
-    window.addEventListener(
-      "load",
-      resizeApp
-    );
+    window.addEventListener("load", function () {
+      resizeApp();
+      forwardNativePushTokenToApp();
+    });
 
-    window.addEventListener(
-      "resize",
-      resizeApp
-    );
+    window.addEventListener("resize", resizeApp);
 
     window.addEventListener(
       "orientationchange",
       function () {
-        setTimeout(
-          resizeApp,
-          200
-        );
+        setTimeout(resizeApp, 200);
       }
     );
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener(
-        "resize",
-        resizeApp
-      );
+      window.visualViewport.addEventListener("resize", resizeApp);
     }
   </script>
 
