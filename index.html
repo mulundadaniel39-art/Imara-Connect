@@ -215,7 +215,7 @@
 
   <iframe
     id="appFrame"
-    src="https://script.google.com/macros/s/AKfycbzRGvx-eHdLxVVfEkIo_H_Eygixw1tvDjlcREcwzHDTdSjiFjzQZxa_baWCaG_wxi3bcw/exec"
+    src="https://script.google.com/macros/s/AKfycbztB9NJJuRNLuf-9gUWE1kED940zydBtlWeRlqQBwt1T-RuF3VbGny5xyXByu1E7jHaZQ/exec"
     title="Imara Connect"
     scrolling="no"
     allow="fullscreen"
@@ -338,6 +338,39 @@
       window.visualViewport.addEventListener("resize", resizeApp);
     }
   </script>
+
+
+    /*
+     * Parent-session bridge.
+     * Only messages coming from the actual Apps Script iframe are accepted.
+     * The session is handed to Android, which already owns the FCM token
+     * and registers the pair directly with the Apps Script backend.
+     */
+    window.addEventListener("message", function (event) {
+      if (!frame || event.source !== frame.contentWindow) return;
+
+      const data = event.data;
+      if (!data || data.type !== "IMARA_PARENT_SESSION") return;
+
+      const sessionToken =
+        String(data.sessionToken || "").trim();
+
+      if (!sessionToken) return;
+
+      try {
+        if (
+          window.ImaraNative &&
+          typeof window.ImaraNative.registerParentSession === "function"
+        ) {
+          window.ImaraNative.registerParentSession(sessionToken);
+        }
+      } catch (error) {
+        console.error(
+          "Imara native push registration failed.",
+          error
+        );
+      }
+    });
 
 </body>
 </html>
